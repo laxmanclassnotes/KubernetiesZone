@@ -1,0 +1,23 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hellocronjob
+spec:
+  schedule: '* * * * *'
+  jobTemplate:
+    metadata:
+      name: getpresentdata
+    spec:
+      backoffLimit: 2
+      template:
+        metadata:
+          name: presentdatapod
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: containerjob
+              image: alpine
+              command:
+                - sleep
+                - 10s    

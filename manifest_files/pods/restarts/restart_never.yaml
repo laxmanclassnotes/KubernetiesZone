@@ -1,0 +1,29 @@
+# restartPolicy-never on nginx
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: restart_never
+spec:
+  restartPolicy: Never
+  containers:
+    - name: restart_never-on
+      image: nginx
+      ports:
+        containerPort: 80 
+
+
+# restartPolicy-never on alpine
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: restart_never
+spec:
+  restartPolicy: Never
+  containers:
+    - name: restart_never-on
+      image: nginx
+      args:
+        - sleep
+        - 10s  

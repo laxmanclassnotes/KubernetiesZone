@@ -1,0 +1,41 @@
+## ReplicationController only allows equality based selectors where as
+#     ReplicaSet supports set based selectors also
+
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: setbased
+  labels:
+    purpose: understsnding
+    concept: setbased
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - nginx
+          - web
+      - key: env
+        operator: NotIn
+        values:
+          - prod
+          - uat
+      - key: failing
+        operator: DoesNotExist
+        values: 
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+        env: dev
+    spec:
+      containers: 
+        - name: nginx
+          image: nginx:1.23
+          ports:
+            - containerPort: 80                

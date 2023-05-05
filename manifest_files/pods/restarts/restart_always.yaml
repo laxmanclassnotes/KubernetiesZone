@@ -1,0 +1,33 @@
+# nginx container
+---
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: restart_always
+spec:
+  restartPolicy: Always
+  containers:
+    - name: restart_always-on
+      image: nginx
+      ports:
+        containerPort: 80
+
+
+
+
+# alpine container
+
+---
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: restart_always
+spec:
+  restartPolicy: Always
+  containers:
+    - name: restart_always-on
+      image: alpine
+      args:
+        - sleep
+        - 3s
+        

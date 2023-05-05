@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: jenkinsreplica 
+spec:
+  minReadySeconds: 4
+  replicas: 3
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      name: jenkinsjob
+      labels:
+        app: jenkins
+    spec:
+      containers:
+        - name: jenkinspod
+          image: jenkins/jenkins:lts-jdk11
+          ports:
+            - containerPort: 8080
+        - name: nginx
+          image: nginx:1.23
+          ports:
+            - containerPort: 80        

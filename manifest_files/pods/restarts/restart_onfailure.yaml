@@ -1,0 +1,33 @@
+# restartPolicy-onFailure(failure) on alpine
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: restartPolicy-onFailure-1
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - name: failure
+      image: alpine
+      args:
+        - sleep
+        - 3SM
+
+
+
+# restartPolicy-onFailure(success) on alpine
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: restartPolicy-onFailure-2
+spec:
+  restartPolicy: OnFailure
+  containers:
+    - name: success
+      image: alpine
+      args:
+        - sleep
+        - 10s

@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-demo
+data:
+  MYSQL_ROOT_PASSWORD: laxman
+  MYSQL_DATABASE: employees
+  MYSQL_USER: laxman
+  MYSQL_PASSWORD: laxman

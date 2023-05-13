@@ -3,13 +3,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jenkins_deploy
-  matchlabels:
+  labels:
     app: jenkins
 spec:
   minReadySeconds: 4
-  replicas: 8
+  replicas: 2
   selector:
-    matchlabels:
+    matchLabels:
       app: jenkins
   strategy:    
     type: RollingUpdate

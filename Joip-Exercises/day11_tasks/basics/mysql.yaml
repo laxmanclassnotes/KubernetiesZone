@@ -1,0 +1,68 @@
+########## nodeselector ###########
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-nodeselector
+  labels:
+    app: mysql
+    purpose: nodeselector
+spec:
+  nodeSelector:
+    purpose: testing
+  containers:
+    - name: mysql
+      image: mysql:8
+      ports:
+        - containerPort: 3306
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: rootroot
+        - name: MYSQL_USER
+          value: laxman
+        - name: MYSQL_PASSWORD
+          value: rootroot
+        - name: MYSQL_DATABASE
+          value: employees
+      volumeMounts:
+        - name: my-volume
+          mountPath: /var/lib/mysql 
+  volumes:
+    - name: my-volume               
+
+######### Affinity #############
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-affinity
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: mysql
+                operator: In
+                values:
+                  - database
+  containers:
+    - name: mysql
+      image: mysql:8
+      ports:
+        - containerPort: 3306
+      env:
+        - name: MYSQL_USER
+          value: laxman
+        - name: MYSQL_PASSWORD
+          value: rootroot
+        - name: MYSQL_DATABASE
+          value: employees
+        - name: MYSQL_ROOT_PASSWORD
+          value: rootroot
+      volumeMounts:
+        name: my-volume
+        mountPath: /var/lib/mysql
+  volumes:
+    - name: my-volume                    

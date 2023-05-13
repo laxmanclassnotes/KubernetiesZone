@@ -1,0 +1,15 @@
+### Ensure usage of secret in MySQL and configmaps
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  labels:
+    app: mysql     
+data:
+  MYSQL_ROOT_PASSWORD: laxman
+  MYSQL_USER: mysql
+  MYSQL_PASSWORD: laxman
+  MYSQL_DATABASE: employees
+  
+   

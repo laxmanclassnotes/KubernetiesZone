@@ -1,0 +1,56 @@
+---  # headless service
+apiVersion: v1
+kind: Service
+metadata:
+  name: nop-headless-svc
+spec:
+  clusterIP: None
+  selector:
+    app: nop
+  ports:
+    - name: nop-svc
+      port: 35000
+      targetPort: 5000
+      protocol: TCP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nopstatefull
+  labels:
+    app: nop
+spec:
+  minReadySeconds: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nop
+  template:
+    metadata:
+      name: nop-pod
+      labels:
+        app: nop
+    spec:
+      containers:
+        - name: nop
+          image: lakshminarayana1849/nopcommerse
+          ports:
+            - containerPort: 5000
+        - name: mysql
+          image: mysql:8
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: laxman
+            - name: MYSQL_USER
+              value: laxman
+            - name: MYSQL_PASSWORD
+              value: laxman
+            - name: MYSQL_DATABASE
+              value: employees
+          volumeMounts:
+            - name: my-volume
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: my-volume          

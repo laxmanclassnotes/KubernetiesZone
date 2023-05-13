@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nop-deploy
+  labels:
+    app: web
+spec:
+  minReadySeconds: 2
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      name: nop-template
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: nopcommerse-pod
+          image: lakshminarayana1849/kubernetes:nopcommerse
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nop-service
+  labels:
+    app: web
+spec:
+  type: LoadBalancer
+  selector:
+    app: web
+  ports:
+    - name: nop-port
+      port: 5000
+      protocol: TCP
+      targetPort: 32000
+              
+
+
+            
+
+                                  

@@ -1,0 +1,52 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-svc
+spec:
+  selector:
+    app: mysql
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+      protocol: TCP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-svc
+  labels:
+    app: 'mysql'
+spec:
+  minReadySeconds: 2
+  replicas: 1
+  serviceName: mysql-svc
+  selector:
+    matchLabels:
+      app: 'mysql'
+  template:
+    metadata:
+      name: mysql-pod
+      labels:
+        app: 'mysql'
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: laxman
+            - name: MYSQL_USER
+              value: laxman
+            - name: MYSQL_PASSWORD
+              value: laxman
+            - name: MYSQL_DATABASE
+              value: employees
+          volumeMounts:
+            - name: my-volume
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: my-volume                               

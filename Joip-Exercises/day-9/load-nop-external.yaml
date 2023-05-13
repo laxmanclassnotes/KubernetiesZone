@@ -1,0 +1,76 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nop-regular-svc
+  labels:
+    app: nop
+spec:
+  selector:
+    app: nop
+  ports:
+    - port: 35000
+      protocol: TCP
+      targetPort: 5000   
+  type: LoadBalancer
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: myvol-claim
+#   labels:
+#     app: nop
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 2Gi  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nopdeployment
+  labels:
+    app: nop
+spec:
+  minReadySeconds: 2
+  replicas: 1
+  serviceName: nop-regular-svc
+  selector:
+    matchLabels:
+      app: nop
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%    
+  template:
+    metadata:
+      name: nop-temp
+      labels:
+        app: nop
+    spec:
+      containers:
+        - name: nop
+          image: lakshminarayana1849/nopcommerse
+          ports:
+            - containerPort: 5000
+        - name: mysql
+          image: mysql:8
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: laxman
+            - name: MYSQL_USER
+              value: laxman
+            - name: MYSQL_PASSWORD
+              value: laxman
+            - name: MYSQL_DATABASE
+              value: employees
+          volumeMounts:
+            - name: my-volume
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: my-volume     

@@ -1,0 +1,58 @@
+############  nodeselector  ###########
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodeselector
+  labels:
+    app: nginx
+    purpose: nodeselector
+spec:
+  nodeSelector:
+    purpose: testing
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 80  
+
+########## Affinity  #########
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-affinity
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: nginx
+                operator: In
+                values:
+                  - app
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+
+################  Taints & Tolerances ###########
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-taint
+spec:
+  tolerations:
+    - key: "key1"
+      operator: "Equal"
+      value: "value1"
+      effect: "NoExecute"
+  containers:
+    - name: nginx-taint
+      image: nginx:1.23
+      ports:
+        - containerPort: 80             

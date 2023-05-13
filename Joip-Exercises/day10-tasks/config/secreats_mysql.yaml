@@ -1,0 +1,12 @@
+---
+apiVersion: v1 
+kind: Secret
+metadata:
+  name: mysql-secreat
+  labels:
+    app: mysql
+data:
+  MYSQL_ROOT_PASSWORD: bGF4bWFu
+  MYSQL_USER: bXlzcWw=
+  MYSQL_PASSWORD: bGF4bWFu
+  MYSQL_DATABASE: ZW1wbG95ZWVz

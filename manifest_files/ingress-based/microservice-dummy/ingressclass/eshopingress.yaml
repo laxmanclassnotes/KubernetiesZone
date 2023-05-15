@@ -11,32 +11,31 @@ spec:
   rules:
     - http:
         paths:
-          - path: /something(/|$)(.*)
+          - path: /basket(/|$)(.*)
             pathType: Prefix 
             backend:
               service:
                 name: basket-service
                 port: 
                   number: 80
-          - path: /something(/|$)(.*)
+          - path: /catalog(/|$)(.*)
             pathType: Prefix 
             backend:
               service:
                 name: catalog-service
                 port: 
                   number: 80
-          - path: /something(/|$)(.*)
+          - path: /identity(/|$)(.*)
             pathType: Prefix 
             backend:
               service:
                 name: identity-service
                 port: 
                   number: 80 
-          - path: /something(/|$)(.*)
+          - path: /order(/|$)(.*)
             pathType: Prefix 
             backend:
               service:
-                name: oeder-service
+                name: order-service
                 port: 
                   number: 80                       
-              

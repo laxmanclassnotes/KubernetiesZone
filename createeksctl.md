@@ -57,7 +57,10 @@ tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 
 sudo mv /tmp/eksctl /usr/local/bin
 ```
+
+
 ## cluster.yaml file For creating two clusters
+
 ```yaml
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
@@ -84,3 +87,27 @@ nodeGroups:
 
 * `eksctl create cluster -f cluster.yaml` command to create clusters
 * `kubectl get nodes`
+
+* kubectl is ready
+  
+
+#### Questions
+
+1. How to check logs of Pods ?
+2. What are events in k8s ?
+3. why should i use k8 ?
+4. what are stateful sets ?
+5. what is purpose of headless service?
+6. what is CSI ?
+7. what is CNI ?
+8. What is the last problem which you faced in k8s ?
+9. How to use external vault in k8s ?
+10. How to backup k8s cluster?
+11. How to upgrade the k8s cluster?
+12. what is draining the node vs cordon the node?
+13. Can we implement custom dns in k8s?
+14. What is default dns in k8s?
+15. communication between two services in different namespaces
+16. How to auto scale nodes in aks/eks? `cluster node autoscaler` 
+17. List down atleast 10 most common k8s failures?
+

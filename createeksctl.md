@@ -44,7 +44,7 @@ kubectl version --client
 
 [ReferHere](https://github.com/weaveworks/eksctl/blob/main/README.md#installation) offical docs
 ```bash
- # for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
+# for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
 ARCH=amd64
 PLATFORM=$(uname -s)_$ARCH
 

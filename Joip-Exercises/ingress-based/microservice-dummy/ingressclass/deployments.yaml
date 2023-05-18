@@ -1,0 +1,112 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basket-deployment
+spec:
+  minReadySeconds: 4
+  replicas: 2
+  selector:
+    matchLabels:
+      app: basket
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      name: basket-pod
+      labels:
+        app: basket
+        version: "1.0.0"
+    spec:
+      containers:
+        - name: basket
+          image: lakshminarayana1849/eshopcontainer-basket:1.0.0 
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-deployment
+spec:
+  minReadySeconds: 4
+  replicas: 2
+  selector:
+    matchLabels:
+      app: catalog
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      name: catalog-pod
+      labels:
+        app: catalog
+        version: "1.0.0"
+    spec:
+      containers:
+        - name: catalog
+          image: lakshminarayana1849/eshopcontainer-catalog:1.0.0 
+          ports:
+            - containerPort: 80 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-deployment
+spec:
+  minReadySeconds: 4
+  replicas: 2
+  selector:
+    matchLabels:
+      app: identity
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      name: identity-pod
+      labels:
+        app: identity
+        version: "1.0.0"
+    spec:
+      containers:
+        - name: identity
+          image: lakshminarayana1849/eshopcontainer-identity:1.0.0 
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-deployment
+spec:
+  minReadySeconds: 4
+  replicas: 2
+  selector:
+    matchLabels:
+      app: order
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      name: order-pod
+      labels:
+        app: order
+        version: "1.0.0"
+    spec:
+      containers:
+        - name: order
+          image: lakshminarayana1849/eshopcontainer-order:1.0.0 
+          ports:
+            - containerPort: 80                                                         

@@ -6,7 +6,6 @@ metadata:
   labels:
     app: mysql
 spec:
-  name: mysql
   selector:
     app: mysql
   ports:

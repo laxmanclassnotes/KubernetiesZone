@@ -23,10 +23,15 @@ spec:
           image: mysql:8
           ports:
             - containerPort: 3306
-          envFrom:
-            - configMapRef:
-                name: mysql-config
-                optional: false 
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: rootroot
+            - name: MYSQL_DATABASE
+              value: mysql
+            - name: MYSQL_USER
+              value: laxman
+            - name: MYSQL_PASSWORD
+              value: rootroot 
           volumeMounts:
             - name: mysql-vol
               mountPath: /var/lib/mysql

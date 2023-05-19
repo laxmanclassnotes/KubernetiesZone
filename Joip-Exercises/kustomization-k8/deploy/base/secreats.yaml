@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dev-secret
+  namespace: dev
+  labels:
+    app: mysql
+data:
+  MYSQL_DATABASE: bXlzcWw= # mysql
+  MYSQL_ROOT_PASSWORD: cm9vdHJvb3Q= # rootroot
+  MYSQL_USER: bGF4bWFu  # laxman
+  MYSQL_PASSWORD: cm9vdHJvb3Q= # rootroot
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: qa-secret
+  namespace: qa
+  labels:
+    app: mysql
+data:
+  MYSQL_DATABASE: bXlzcWw= # mysql
+  MYSQL_ROOT_PASSWORD: bGF4bWFuMTg0OUA= # laxman1849@
+  MYSQL_USER: Z290dGlwYXRp  # gottipati
+  MYSQL_PASSWORD: bGF4bWFuMTg0OUA= # laxman1849@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: test-secret
+  namespace: test
+  labels:
+    app: mysql
+data:
+  MYSQL_DATABASE: bXlzcWw= # mysql
+  MYSQL_ROOT_PASSWORD: Z290dGlwYXRpMTg0OUA= # gottipati1849@
+  MYSQL_USER: bmFyYXlhbmE=  # narayana
+  MYSQL_PASSWORD: Z290dGlwYXRpMTg0OUA= # gottipati1849@

@@ -7,7 +7,6 @@ metadata:
     app: mysql
 spec:
   clusterIP: None
-  type: ClusterIP
   selector:
     app: mysql
   ports:
